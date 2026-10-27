@@ -1,0 +1,12 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfplan
+crash.log
+crash.*.log
+
+# This repo is public and QUOTE_INFRA (stage) never had this file either,
+# so terraform.tfvars stays committed intentionally - subscription_id and
+# CIDRs aren't secrets, and real secret values never go in tfvars here
+# (Key Vault owns those, see each tenant's README/CLAUDE.md).
