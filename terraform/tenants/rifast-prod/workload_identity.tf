@@ -12,9 +12,9 @@ resource "azurerm_user_assigned_identity" "workload" {
 # Every quote-* namespace in gitops-quote's RIFAST tenant - kept in sync
 # with gitops-quote/values/tenants/rifast-prod/ by hand (same manual-sync
 # requirement stage's own workload_identity_namespaces list has - nothing
-# here auto-derives from the GitOps repo). Does NOT include quote-metabase
-# (stage-only experiment, already removed from gitops-quote-mrea, no
-# reason to carry into a fresh prod customer).
+# here auto-derives from the GitOps repo). quote-metabase added 2026-10-28
+# on explicit instruction - RIFAST gets its own dedicated Metabase
+# instance, unlike stage where it was a removed experiment.
 variable "workload_identity_namespaces" {
   description = "Namespaces whose quoteplus-workload-sa ServiceAccount can federate as the workload identity"
   type        = list(string)
@@ -35,6 +35,7 @@ variable "workload_identity_namespaces" {
     "quote-pgadmin",
     "quote-temporal",
     "quote-temporal-worker",
+    "quote-metabase",
   ]
 }
 
