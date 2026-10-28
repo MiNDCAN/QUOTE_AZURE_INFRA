@@ -8,10 +8,15 @@ resource "azurerm_key_vault" "this" {
   rbac_authorization_enabled    = true
   purge_protection_enabled      = false
   soft_delete_retention_days    = 7
-  public_network_access_enabled = false
+  # TEMPORARY (2026-10-28) - flipped to true + default_action Allow solely to
+  # populate initial secrets from outside the VNet (the private-endpoint-only
+  # setup has no path in from a workstation). Revert both back to false/Deny
+  # once secret population is done - this is not the intended steady state,
+  # see CLAUDE.md's "proper Key Vault" design intent.
+  public_network_access_enabled = true
 
   network_acls {
-    default_action = "Deny"
+    default_action = "Allow"
     bypass         = "AzureServices"
   }
 
