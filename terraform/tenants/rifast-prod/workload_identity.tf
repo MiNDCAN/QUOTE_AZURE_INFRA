@@ -15,6 +15,8 @@ resource "azurerm_user_assigned_identity" "workload" {
 # here auto-derives from the GitOps repo). quote-metabase added 2026-10-28
 # on explicit instruction - RIFAST gets its own dedicated Metabase
 # instance, unlike stage where it was a removed experiment.
+# quote-temporal/quote-temporal-worker/quote-distribution-list removed
+# 2026-10-29 on explicit instruction - not needed for this customer.
 variable "workload_identity_namespaces" {
   description = "Namespaces whose quoteplus-workload-sa ServiceAccount can federate as the workload identity"
   type        = list(string)
@@ -29,12 +31,9 @@ variable "workload_identity_namespaces" {
     "quote-customer-management",
     "quote-language",
     "quotemanagement-service",
-    "quote-distribution-list",
     "quote-redis",
     "quote-postgres",
     "quote-pgadmin",
-    "quote-temporal",
-    "quote-temporal-worker",
     "quote-metabase",
   ]
 }
